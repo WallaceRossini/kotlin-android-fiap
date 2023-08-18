@@ -17,6 +17,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -73,12 +77,19 @@ fun TextComponent() {
 
 @Composable
 fun TextFieldComponent(){
+
+  var textField by remember {
+    mutableStateOf("")
+  }
+
   Column(
     modifier = Modifier.padding(32.dp)
   ) {
     TextField(
-      value = "", 
-      onValueChange = {},
+      value = textField,
+      onValueChange = { text ->
+        textField = text
+      },
       modifier = Modifier.fillMaxWidth(),
       label = {
         Text(text = "Qual o seu nome?")
